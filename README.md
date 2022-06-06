@@ -91,7 +91,7 @@ void main() {
 
 <img src="screenshots/access_manager.png">
 
-You can customize ConsoleQuill
+You can customize ConsoleQuill.
 
 ```dart
 import 'package:quick_quotes_quill/console_quill.dart';
