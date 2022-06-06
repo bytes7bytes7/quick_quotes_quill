@@ -42,7 +42,7 @@ double divide(int a, int b) {
 
 ```
 
-<img src="screenshots/single_quill.png">
+<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/single_quill.png">
 
 If you have multiple quills, then you can manage them with `SpreadQuillManager` 
 or create your own implementation of `QuillManagerBase`.
@@ -64,7 +64,7 @@ void main() {
 }
 ```
 
-<img src="screenshots/spread_manager.png">
+<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/spread_manager.png">
 
 Also you can use `AccessQuillManager` to access certain quill.
 
@@ -89,7 +89,7 @@ void main() {
 
 ```
 
-<img src="screenshots/access_manager.png">
+<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/access_manager.png">
 
 You can customize ConsoleQuill.
 
@@ -110,4 +110,4 @@ void main() {
 }
 ```
 
-<img src="screenshots/change_config.png">
+<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/change_config.png">
