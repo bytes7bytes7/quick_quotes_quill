@@ -8,7 +8,7 @@ description: Simple logger package.
   Just create implementation or use SpreadQuillManager, AccessQuillManager.
   SpreadQuillManager gives each log to all quills.
   AccessQuillManager provides certain quill by its name.
-version: 1.1.0
+version: 1.1.1
 homepage: https://github.com/bytes7bytes7/quick_quotes_quill
 
 environment:

@@ -8,6 +8,38 @@ Create your own implementations of `QuillBase`.
 Manage all your quills with `QuillManagerBase`.
 This package has some implementations: `ConsoleQuill`, `SpreadQuillManager` and `AccessQuillManager`.
 
+## Colors
+
+Note that IDEs: VSCode, XCode, Android Studio, IntelliJ do NOT support ANSI 
+escape sequences (that are used to colorize output) in their terminal outputs. 
+
+If you are using a JetBrains IDE (Android Studio, IntelliJ, etc.) you can use 
+[Grep Console Plugin](https://plugins.jetbrains.com/plugin/7125-grep-console). 
+To do that follow the steps:
+- turn off colorized output
+
+```dart
+final quill = ConsoleQuill('App')..turnOffColors();
+```
+
+- install `Grep Console Plugin`
+- configure the plugin like that
+<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/grep_console.png">
+
+### Grep Console configuration
+
+Regex:
+- `[\w ]+(?= \[(INFO|ERROR|LOG)\])` - for a quill's name
+- `\[ERROR\]` - for error
+- `\[LOG\]` - for log
+- `\[INFO\]` - for info
+
+Colors:
+- `28928F` - for a quill's name
+- `F2188E` - for error
+- `9BB822` - for log
+- `528CDA` - for info
+
 ## Usage
 
 You can use 1-2 loggers for a small project.

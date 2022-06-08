@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Added `Grep Console` plugin to README
+
 ## 1.1.0
 
 - Added `turnOnColors`, `turnOffColors` to `ConsoleQuill`
