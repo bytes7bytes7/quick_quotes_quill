@@ -91,7 +91,7 @@ void main() {
 
 <img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/access_manager.png">
 
-You can customize ConsoleQuill.
+You can customize `ConsoleQuill`.
 
 ```dart
 import 'package:quick_quotes_quill/console_quill.dart';
@@ -106,8 +106,10 @@ void main() {
       msgColor: CQColors.lightBlue,
       tagStyle: CQStyles.underlineOn,
     )
-    ..info('New style');
+    ..info('New style')
+    ..turnOffColors()
+    ..error('No more colors!');
 }
 ```
 
-<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/change_config.png">
+<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/customize.png">

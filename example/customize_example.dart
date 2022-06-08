@@ -10,5 +10,7 @@ void main() {
       msgColor: CQColors.lightBlue,
       tagStyle: CQStyles.underlineOn,
     )
-    ..info('New style');
+    ..info('New style')
+    ..turnOffColors()
+    ..error('No more colors!');
 }

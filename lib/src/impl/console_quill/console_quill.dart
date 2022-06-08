@@ -14,6 +14,8 @@ class ConsoleQuill implements QuillBase {
   @override
   final String name;
 
+  bool _useColors = true;
+
   ConsoleQuillConfig config = ConsoleQuillConfig(
     timeColor: CQColors.startUp,
     nameColor: CQColors.cyan,
@@ -36,23 +38,45 @@ class ConsoleQuill implements QuillBase {
   @override
   void info(Object? msg) => print(_format(msg, QuillTag.info));
 
+  void turnOnColors() => _useColors = true;
+
+  void turnOffColors() => _useColors = false;
+
   String _format(Object? msg, QuillTag tag) {
-    var tagColor = '';
-    switch (tag) {
-      case QuillTag.log:
-        tagColor = config.logTagColor;
-        break;
-      case QuillTag.error:
-        tagColor = config.errorTagColor;
-        break;
-      case QuillTag.info:
-        tagColor = config.infoTagColor;
-        break;
+    final fields = <String>[
+      '${DateTime.now()}',
+      name,
+      tag.name.toUpperCase(),
+      '$msg'
+    ];
+
+    if (_useColors) {
+      var tagColor = '';
+      switch (tag) {
+        case QuillTag.log:
+          tagColor = config.logTagColor;
+          break;
+        case QuillTag.error:
+          tagColor = config.errorTagColor;
+          break;
+        case QuillTag.info:
+          tagColor = config.infoTagColor;
+          break;
+      }
+
+      return '[${config.timeStyle}${config.timeColor}${fields[0]}]'
+          '${CQStyles.noStyle} '
+          '${config.nameStyle}${config.nameColor}${fields[1]}'
+          '${CQStyles.noStyle} '
+          '${config.tagStyle}$tagColor[${fields[2]}]'
+          '${CQStyles.noStyle} '
+          '${config.msgStyle}${config.msgColor}${fields[3]}'
+          '${CQStyles.noStyle}';
     }
 
-    return '[${config.timeStyle}${config.timeColor}${DateTime.now()}]${CQStyles.noStyle} '
-        '${config.nameStyle}${config.nameColor}$name${CQStyles.noStyle} '
-        '${config.tagStyle}$tagColor[${tag.name.toUpperCase()}]${CQStyles.noStyle} '
-        '${config.msgStyle}${config.msgColor}$msg';
+    return '[${fields[0]}] '
+        '${fields[1]} '
+        '[${fields[2]}] '
+        '${fields[3]}';
   }
 }
