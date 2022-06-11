@@ -7,12 +7,15 @@ part 'bg_cq_color.dart';
 
 /// Color of [ConsoleQuill]'s output.
 class CQColor extends CQEscapeCode {
-  /// Pass only value in range [0; 255].
-  const CQColor(super.value);
+  /// Pass value only in range [0; 255].
+  const CQColor(super.code);
 
   /// Get foreground color.
-  FGCQColor get fg => FGCQColor(value);
+  FGCQColor get fg => FGCQColor(code);
 
   /// Get background color.
-  BGCQColor get bg => BGCQColor(value);
+  BGCQColor get bg => BGCQColor(code);
+
+  @override
+  String toString() => '${code}m';
 }

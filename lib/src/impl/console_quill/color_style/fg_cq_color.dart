@@ -2,12 +2,12 @@ part of 'cq_color.dart';
 
 /// Foreground Color of [ConsoleQuill]'s output.
 class FGCQColor extends CQColor {
-  const FGCQColor(super.value);
+  const FGCQColor(super.code);
 
   @override
   String toString() {
     // It is necessary for default colors
-    if (value == 39) {
+    if (code == 39) {
       return '\x1b[${super.toString()}';
     }
 

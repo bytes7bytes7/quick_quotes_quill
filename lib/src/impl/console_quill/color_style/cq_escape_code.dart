@@ -1,10 +1,12 @@
-/// ANSI escape code.
+import '../console_quill.dart';
+
+/// [ConsoleQuill] escape code.
 abstract class CQEscapeCode {
-  const CQEscapeCode(this.value);
+  const CQEscapeCode(this.code);
 
   /// Escape code value.
-  final int value;
+  final int code;
 
   @override
-  String toString() => '${value}m';
+  String toString() => '$code';
 }
