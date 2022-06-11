@@ -1,14 +1,22 @@
-/// Interface for quill
+/// Interface for quill.
 abstract class QuillBase {
-  /// Quill name
+  /// {@template quick_quotes_quill.QuillBase.name}
+  /// Quill name.
+  /// {@endtemplate}
   String get name;
 
-  /// For usual message
+  /// {@template quick_quotes_quill.QuillBase.log}
+  /// For usual message.
+  /// {@endtemplate}
   void log(Object? msg);
 
-  /// For error message
+  /// {@template quick_quotes_quill.QuillBase.error}
+  /// For error message.
+  /// {@endtemplate}
   void error(Object? msg);
 
-  /// For important message
+  /// {@template quick_quotes_quill.QuillBase.info}
+  /// For important message.
+  /// {@endtemplate}
   void info(Object? msg);
 }

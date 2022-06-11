@@ -6,9 +6,9 @@ void main() {
   quill
     ..info('Old style')
     ..config = quill.config.copyWith(
-      nameColor: CQColors.lightMagenta,
-      msgColor: CQColors.lightBlue,
-      tagStyle: CQStyles.underlineOn,
+      nameBGColor: CQHIColors.white.bg,
+      msgFGColor: CQHIColors.blue.fg,
+      tagStyle: CQSTDStyles.underlineOn,
     )
     ..info('New style')
     ..turnOffColors()

@@ -1,45 +1,63 @@
 // ignore_for_file: avoid_print
 
 import '../../interface/quill_base.dart';
-import 'cq_colors.dart';
-import 'cq_styles.dart';
+import 'color_style/color_style.dart';
 import 'quill_tag.dart';
 
 part 'console_quill_config.dart';
 
-/// Quill that prints logs via `print`
+/// Quill that prints logs via [print].
 class ConsoleQuill implements QuillBase {
   ConsoleQuill(this.name);
 
+  /// {@macro quick_quotes_quill.QuillBase.name}
   @override
   final String name;
 
   bool _useColors = true;
 
+  /// Configuration of quill output.
   ConsoleQuillConfig config = ConsoleQuillConfig(
-    timeColor: CQColors.startUp,
-    nameColor: CQColors.cyan,
-    logTagColor: CQColors.green,
-    errorTagColor: CQColors.red,
-    infoTagColor: CQColors.blue,
-    msgColor: CQColors.startUp,
-    timeStyle: CQStyles.noStyle,
-    nameStyle: CQStyles.boldOn,
-    tagStyle: CQStyles.noStyle,
-    msgStyle: CQStyles.noStyle,
+    timeFGColor: CQSTDColors.defaultFG,
+    nameFGColor: CQSTDColors.cyan.fg,
+    logTagFGColor: CQSTDColors.green.fg,
+    errorTagFGColor: CQSTDColors.red.fg,
+    infoTagFGColor: CQSTDColors.blue.fg,
+    msgFGColor: CQSTDColors.defaultFG,
+    timeBGColor: CQSTDColors.defaultBG,
+    nameBGColor: CQSTDColors.defaultBG,
+    logTagBGColor: CQSTDColors.defaultBG,
+    errorTagBGColor: CQSTDColors.defaultBG,
+    infoTagBGColor: CQSTDColors.defaultBG,
+    msgBGColor: CQSTDColors.defaultBG,
+    timeStyle: CQSTDStyles.normal,
+    nameStyle: CQSTDStyles.boldOn,
+    tagStyle: CQSTDStyles.normal,
+    msgStyle: CQSTDStyles.normal,
   );
 
+  /// {@macro quick_quotes_quill.QuillBase.log}
+  ///
+  /// Print [msg] with [QuillTag.log] tag.
   @override
   void log(Object? msg) => print(_format(msg, QuillTag.log));
 
+  /// {@macro quick_quotes_quill.QuillBase.error}
+  ///
+  /// Print [msg] with [QuillTag.error] tag.
   @override
   void error(Object? msg) => print(_format(msg, QuillTag.error));
 
+  /// {@macro quick_quotes_quill.QuillBase.info}
+  ///
+  /// Print [msg] with [QuillTag.info] tag.
   @override
   void info(Object? msg) => print(_format(msg, QuillTag.info));
 
+  /// Resume using colors in output.
   void turnOnColors() => _useColors = true;
 
+  /// Stop using colors in output.
   void turnOffColors() => _useColors = false;
 
   String _format(Object? msg, QuillTag tag) {
@@ -51,27 +69,28 @@ class ConsoleQuill implements QuillBase {
     ];
 
     if (_useColors) {
-      var tagColor = '';
+      var tagColor = CQSTDColors.defaultFG;
       switch (tag) {
         case QuillTag.log:
-          tagColor = config.logTagColor;
+          tagColor = config.logTagFGColor;
           break;
         case QuillTag.error:
-          tagColor = config.errorTagColor;
+          tagColor = config.errorTagFGColor;
           break;
         case QuillTag.info:
-          tagColor = config.infoTagColor;
+          tagColor = config.infoTagFGColor;
           break;
       }
 
-      return '[${config.timeStyle}${config.timeColor}${fields[0]}]'
-          '${CQStyles.noStyle} '
-          '${config.nameStyle}${config.nameColor}${fields[1]}'
-          '${CQStyles.noStyle} '
+      return '${CQSTDStyles.normal}'
+          '${config.timeStyle}${config.timeFGColor}[${fields[0]}]'
+          '${CQSTDStyles.normal} '
+          '${config.nameStyle}${config.nameFGColor}${fields[1]}'
+          '${CQSTDStyles.normal} '
           '${config.tagStyle}$tagColor[${fields[2]}]'
-          '${CQStyles.noStyle} '
-          '${config.msgStyle}${config.msgColor}${fields[3]}'
-          '${CQStyles.noStyle}';
+          '${CQSTDStyles.normal} '
+          '${config.msgStyle}${config.msgFGColor}${fields[3]}'
+          '${CQSTDStyles.normal}';
     }
 
     return '[${fields[0]}] '

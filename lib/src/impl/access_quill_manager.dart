@@ -3,17 +3,19 @@ import '../interface/quill_manager_base.dart';
 
 const _name = 'Access Quill Manager';
 
-/// Manager that provides certain quill
+/// Manager that provides a certain quill.
 class AccessQuillManager implements QuillManagerBase {
   AccessQuillManager._(this.name);
 
   static final inst = AccessQuillManager._(_name);
 
+  /// {@macro quick_quotes_quill.QuillBase.name}
   @override
   final String name;
 
   final _quills = <String, QuillBase>{};
 
+  /// {@macro quick_quotes_quill.QuillManagerBase.initialize}
   @override
   Future<void> initialize(List<QuillBase> quills) async {
     for (final quill in quills) {
@@ -21,6 +23,7 @@ class AccessQuillManager implements QuillManagerBase {
     }
   }
 
+  /// Provide a quill by its name.
   QuillBase quill(String name) {
     final q = _quills[name];
     if (q != null) {

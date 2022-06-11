@@ -24,6 +24,7 @@ final quill = ConsoleQuill('App')..turnOffColors();
 
 - install `Grep Console Plugin`
 - configure the plugin like that
+
 <img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/grep_console.png">
 
 ### Grep Console configuration
@@ -39,6 +40,9 @@ Colors:
 - `F2188E` - for error
 - `9BB822` - for log
 - `528CDA` - for info
+
+New versions of Android Studio (for exp. 2021.2.1) DO support ANSI 
+escape sequences (that are used to colorize output) in terminal outputs.
 
 ## Usage
 

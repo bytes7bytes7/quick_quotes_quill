@@ -3,6 +3,9 @@ import 'package:quick_quotes_quill/console_quill.dart';
 final quill = ConsoleQuill('App');
 
 void main() {
+  quill.config = quill.config.copyWith(
+    msgStyle: CQSTDStyles.crossedOn,
+  );
   divide(10, 5);
 }
 
