@@ -38,6 +38,7 @@ Regex:
 - `\[ERROR\]` - for error
 - `\[LOG\]` - for log
 - `\[INFO\]` - for info
+- `\[\d{4}(?:-\d{2}){2} (?:\d{2}:){2}\d{2}.\d{6}\]` - for DateTime
 
 Colors:
 
@@ -45,6 +46,7 @@ Colors:
 - `F2188E` - for error
 - `9BB822` - for log
 - `528CDA` - for info
+- `808080` - for DateTime
 
 New versions of Android Studio (for exp. 2021.2.1) DO support ANSI escape sequences (that are used
 to colorize output) in terminal outputs.
