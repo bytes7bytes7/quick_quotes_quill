@@ -15,11 +15,12 @@ class ConsoleQuill implements QuillBase {
   final String name;
 
   bool _useColors = true;
+  bool _useStyles = true;
 
   /// Configuration of quill output.
   ConsoleQuillConfig config = ConsoleQuillConfig(
-    timeFGColor: CQSTDColors.defaultFG,
-    nameFGColor: CQSTDColors.cyan.fg,
+    timeFGColor: CQSTDColors.white.fg,
+    nameFGColor: CQHIColors.cyan.fg,
     logTagFGColor: CQSTDColors.green.fg,
     errorTagFGColor: CQSTDColors.red.fg,
     infoTagFGColor: CQSTDColors.blue.fg,
@@ -60,42 +61,80 @@ class ConsoleQuill implements QuillBase {
   /// Stop using colors in output.
   void turnOffColors() => _useColors = false;
 
+  /// Resume using styles in output.
+  void turnOnStyles() => _useStyles = true;
+
+  /// Stop using styles in output.
+  void turnOffStyles() => _useStyles = false;
+
   String _format(Object? msg, QuillTag tag) {
-    final fields = <String>[
-      '${DateTime.now()}',
+    final fields = [
+      '[${DateTime.now()}]',
       name,
-      tag.name.toUpperCase(),
-      '$msg'
+      '[${tag.name.toUpperCase()}]',
+      '$msg',
     ];
 
+    final parts = List.generate(fields.length, (index) => StringBuffer());
+
+    if (_useStyles) {
+      final styles = [
+        config.timeStyle,
+        config.nameStyle,
+        config.tagStyle,
+        config.msgStyle,
+      ];
+
+      for (var i = 0; i < fields.length; i++) {
+        parts[i].write(styles[i]);
+      }
+    }
+
     if (_useColors) {
-      var tagColor = CQSTDColors.defaultFG;
+      final fgColors = [
+        config.timeFGColor,
+        config.nameFGColor,
+        '',
+        config.msgFGColor,
+      ];
+      final bgColors = [
+        config.timeBGColor,
+        config.nameBGColor,
+        '',
+        config.msgBGColor,
+      ];
+
+      var tagFGColor = CQSTDColors.defaultFG;
+      var tagBGColor = CQSTDColors.defaultBG;
       switch (tag) {
         case QuillTag.log:
-          tagColor = config.logTagFGColor;
+          tagFGColor = config.logTagFGColor;
+          tagBGColor = config.logTagBGColor;
           break;
         case QuillTag.error:
-          tagColor = config.errorTagFGColor;
+          tagFGColor = config.errorTagFGColor;
+          tagBGColor = config.errorTagBGColor;
           break;
         case QuillTag.info:
-          tagColor = config.infoTagFGColor;
+          tagFGColor = config.infoTagFGColor;
+          tagBGColor = config.infoTagBGColor;
           break;
       }
 
-      return '${CQSTDStyles.normal}'
-          '${config.timeStyle}${config.timeFGColor}[${fields[0]}]'
-          '${CQSTDStyles.normal} '
-          '${config.nameStyle}${config.nameFGColor}${fields[1]}'
-          '${CQSTDStyles.normal} '
-          '${config.tagStyle}$tagColor[${fields[2]}]'
-          '${CQSTDStyles.normal} '
-          '${config.msgStyle}${config.msgFGColor}${fields[3]}'
-          '${CQSTDStyles.normal}';
+      fgColors[2] = tagFGColor;
+      bgColors[2] = tagBGColor;
+
+      for (var i = 0; i < fields.length; i++) {
+        parts[i].write(fgColors[i]);
+        parts[i].write(bgColors[i]);
+      }
     }
 
-    return '[${fields[0]}] '
-        '${fields[1]} '
-        '[${fields[2]}] '
-        '${fields[3]}';
+    for (var i = 0; i < fields.length; i++) {
+      parts[i].write(fields[i]);
+    }
+
+    return '${parts.map((e) => '$e').join('${CQSTDStyles.normal} ')}'
+        '${CQSTDStyles.normal}';
   }
 }

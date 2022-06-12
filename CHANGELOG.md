@@ -1,3 +1,20 @@
+## 2.0.0
+
+### Breaking Changes
+
+- Changed `ConsoleQuillConfig` interface by replacing `String` fields with `FGCQColor`, `BGCQColor`,
+  `CQStyle`
+- `AccessQuillManager.quill` does not throw `Exception` anymore. It returns nullable `QuillBase?`
+
+### Internal
+
+- Added `CQEscapeCode` interface and its inheritors: `CQColor`, `CQStyle`
+- Added inheritors of `CQColor`: `FGCQColor`, `BGCQColor`
+- Added `CQSTDColors`, `CQHIColors`
+- Added `CQSTDStyles`
+- Changed default config of `ConsoleQuill`
+- Gathered all examples in a single file
+
 ## 1.1.1
 
 - Added `Grep Console` plugin to README

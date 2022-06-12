@@ -24,14 +24,7 @@ class AccessQuillManager implements QuillManagerBase {
   }
 
   /// Provide a quill by its name.
-  QuillBase quill(String name) {
-    final q = _quills[name];
-    if (q != null) {
-      return q;
-    }
-
-    throw Exception('No quill with name "$name"');
-  }
+  QuillBase? quill(String name) => _quills[name];
 
   @Deprecated('Use `quill` method instead')
   @override

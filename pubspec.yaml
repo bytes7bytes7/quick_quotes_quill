@@ -1,14 +1,8 @@
 name: quick_quotes_quill
 description: Simple logger package.
-  You can create your own loggers (quills) by implementing QuillBase.
-  Also package has one implementation of QuillBase - ConsoleQuill.
-  This class prints colorized logs.
-  You can customize ConsoleQuill by changing colors.
-  More than that you can manage quills with QuillManagerBase.
-  Just create implementation or use SpreadQuillManager, AccessQuillManager.
-  SpreadQuillManager gives each log to all quills.
-  AccessQuillManager provides certain quill by its name.
-version: 1.1.1
+  Create your loggers (quills) by implementing QuillBase or use ConsoleQuill.
+  Manage quills by implementing QuillManagerBase or use SpreadQuillManager, AccessQuillManager.
+version: 2.0.0
 homepage: https://github.com/bytes7bytes7/quick_quotes_quill
 
 environment:
