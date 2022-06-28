@@ -1,16 +1,15 @@
 // ignore_for_file: avoid_print
 
-import '../../interface/quill_base.dart';
+import '../../interface/quill.dart';
 import 'color_style/color_style.dart';
-import 'quill_tag.dart';
 
 part 'console_quill_config.dart';
 
 /// Quill that prints logs via [print].
-class ConsoleQuill implements QuillBase {
+class ConsoleQuill implements Quill {
   ConsoleQuill(this.name);
 
-  /// {@macro quick_quotes_quill.QuillBase.name}
+  /// {@macro quick_quotes_quill.Quill.name}
   @override
   final String name;
 
@@ -37,19 +36,19 @@ class ConsoleQuill implements QuillBase {
     msgStyle: CQSTDStyles.normal,
   );
 
-  /// {@macro quick_quotes_quill.QuillBase.log}
+  /// {@macro quick_quotes_quill.Quill.log}
   ///
   /// Print [msg] with [QuillTag.log] tag.
   @override
   void log(Object? msg) => print(_format(msg, QuillTag.log));
 
-  /// {@macro quick_quotes_quill.QuillBase.error}
+  /// {@macro quick_quotes_quill.Quill.error}
   ///
   /// Print [msg] with [QuillTag.error] tag.
   @override
   void error(Object? msg) => print(_format(msg, QuillTag.error));
 
-  /// {@macro quick_quotes_quill.QuillBase.info}
+  /// {@macro quick_quotes_quill.Quill.info}
   ///
   /// Print [msg] with [QuillTag.info] tag.
   @override

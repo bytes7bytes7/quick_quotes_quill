@@ -4,8 +4,9 @@ Logger package.
 
 ## Features
 
-Create your own implementations of `QuillBase`. Manage all your quills with `QuillManagerBase`. This
-package has some implementations: `ConsoleQuill`, `SpreadQuillManager` and `AccessQuillManager`.
+Create your own implementations of `Quill`. Manage all your quills with `QuillManager`. This package
+has some implementations: `ConsoleQuill`, `FileQuill`, `SpreadQuillManager` and `AccessQuillManager`
+.
 
 ## Colors
 
@@ -61,7 +62,7 @@ import 'package:quick_quotes_quill/console_quill.dart';
 final quill = ConsoleQuill('Single');
 ```
 
-QuillBase has 3 functions: log, error, message.
+Quill has 3 functions: log, error, message.
 
 ```dart
 void singleQuill() {
@@ -85,20 +86,37 @@ double divide(int a, int b) {
 
 <img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/single_quill.png">
 
-If you have multiple quills, then you can manage them with `SpreadQuillManager`
-or create your own implementation of `QuillManagerBase`.
+Also you can use `FileQuill` to store your logs in file. This quill allows use to specify directory
+and the max size of each log file. When a file reaches size limit, `FileQuill` archives it and
+create a new one.
 
 ```dart
-import 'package:quick_quotes_quill/console_quill.dart';
-import 'package:quick_quotes_quill/spread_quill_manager.dart';
+import 'dart:io';
+
+import 'package:quick_quotes_quill/file_quill.dart';
+
+void fileQuill() {
+  FileQuill('File Quill', dir: Directory.current)
+    ..info('Some information')
+    ..log('Simple message');
+}
+
+```
+
+<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/file_quill.png">
+
+If you have multiple quills, then you can manage them with `SpreadQuillManager`
+or create your own implementation of `QuillManager`.
+
+```dart
+import 'package:quick_quotes_quill/all.dart';
 
 void spreadQuillManger() {
-  SpreadQuillManager.inst.initialize([
-    ConsoleQuill('Quill A'),
-    ConsoleQuill('Quill B'),
-  ]);
-
-  SpreadQuillManager.inst
+  SpreadQuillManager('Test manager')
+    ..initialize([
+      ConsoleQuill('Quill A'),
+      ConsoleQuill('Quill B'),
+    ])
     ..info('There are 2 quills')
     ..log('Nothing interesting')
     ..error('Something is wrong...');
@@ -110,20 +128,20 @@ void spreadQuillManger() {
 Also you can use `AccessQuillManager` to access certain quill.
 
 ```dart
-import 'package:quick_quotes_quill/access_quill_manager.dart';
-import 'package:quick_quotes_quill/console_quill.dart';
+import 'package:quick_quotes_quill/all.dart';
 
 void accessQuillManager() {
-  AccessQuillManager.inst.initialize([
-    ConsoleQuill('Quill A'),
-    ConsoleQuill('Quill B'),
-  ]);
+  final quillManager = AccessQuillManager('Test manager')
+    ..initialize([
+      ConsoleQuill('Quill A'),
+      ConsoleQuill('Quill B'),
+    ]);
 
-  final quillB = AccessQuillManager.inst.quill('Quill B');
+  final quillB = quillManager.quill('Quill B');
   if (quillB != null) {
     quillB.info('I am here!');
 
-    final quillX = AccessQuillManager.inst.quill('Quill X');
+    final quillX = quillManager.quill('Quill X');
     if (quillX == null) {
       quillB.error('"Quill X" do not exist');
     }

@@ -1,40 +1,31 @@
-import '../interface/quill_base.dart';
-import '../interface/quill_manager_base.dart';
-
-const _name = 'Access Quill Manager';
+import '../interface/quill.dart';
+import '../interface/quill_manager.dart';
 
 /// Manager that provides a certain quill.
-class AccessQuillManager implements QuillManagerBase {
-  AccessQuillManager._(this.name);
+class AccessQuillManager implements QuillManager {
+  AccessQuillManager(this.name);
 
-  static final inst = AccessQuillManager._(_name);
-
-  /// {@macro quick_quotes_quill.QuillBase.name}
+  /// {@macro quick_quotes_quill.Quill.name}
   @override
   final String name;
 
-  final _quills = <String, QuillBase>{};
+  final _quills = <String, Quill>{};
+  var _initialized = false;
 
-  /// {@macro quick_quotes_quill.QuillManagerBase.initialize}
+  /// {@macro quick_quotes_quill.QuillManager.initialize}
   @override
-  Future<void> initialize(List<QuillBase> quills) async {
+  Future<void> initialize(List<Quill> quills) async {
+    if (_initialized) {
+      throw Exception('$runtimeType has already been initialized');
+    }
+
     for (final quill in quills) {
       _quills[quill.name] = quill;
     }
+
+    _initialized = true;
   }
 
   /// Provide a quill by its name.
-  QuillBase? quill(String name) => _quills[name];
-
-  @Deprecated('Use `quill` method instead')
-  @override
-  void log(Object? msg) {}
-
-  @Deprecated('Use `quill` method instead')
-  @override
-  void error(Object? msg) {}
-
-  @Deprecated('Use `quill` method instead')
-  @override
-  void info(Object? msg) {}
+  Quill? quill(String name) => _quills[name];
 }

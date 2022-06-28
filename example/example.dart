@@ -1,9 +1,10 @@
-import 'package:quick_quotes_quill/access_quill_manager.dart';
-import 'package:quick_quotes_quill/console_quill.dart';
-import 'package:quick_quotes_quill/spread_quill_manager.dart';
+import 'dart:io';
+
+import 'package:quick_quotes_quill/all.dart';
 
 void main() {
   singleQuill();
+  fileQuill();
   spreadQuillManger();
   accessQuillManager();
   customize();
@@ -29,29 +30,35 @@ double divide(int a, int b) {
   return r;
 }
 
-void spreadQuillManger() {
-  SpreadQuillManager.inst.initialize([
-    ConsoleQuill('Quill A'),
-    ConsoleQuill('Quill B'),
-  ]);
+void fileQuill() {
+  FileQuill('File Quill', dir: Directory.current)
+    ..info('Some information')
+    ..log('Simple message');
+}
 
-  SpreadQuillManager.inst
+void spreadQuillManger() {
+  SpreadQuillManager('Test manager')
+    ..initialize([
+      ConsoleQuill('Quill A'),
+      ConsoleQuill('Quill B'),
+    ])
     ..info('There are 2 quills')
     ..log('Nothing interesting')
     ..error('Something is wrong...');
 }
 
 void accessQuillManager() {
-  AccessQuillManager.inst.initialize([
-    ConsoleQuill('Quill A'),
-    ConsoleQuill('Quill B'),
-  ]);
+  final quillManager = AccessQuillManager('Test manager')
+    ..initialize([
+      ConsoleQuill('Quill A'),
+      ConsoleQuill('Quill B'),
+    ]);
 
-  final quillB = AccessQuillManager.inst.quill('Quill B');
+  final quillB = quillManager.quill('Quill B');
   if (quillB != null) {
     quillB.info('I am here!');
 
-    final quillX = AccessQuillManager.inst.quill('Quill X');
+    final quillX = quillManager.quill('Quill X');
     if (quillX == null) {
       quillB.error('"Quill X" do not exist');
     }

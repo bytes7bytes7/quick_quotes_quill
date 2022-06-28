@@ -1,3 +1,18 @@
+## 3.0.0
+
+## Breaking Changes
+
+- Renamed `QuillBase` to `Quill`, `QuillManagerBase` to `QuillManager`
+- `QuillManager` no longer extends `Quill`
+- `AccessQuillManager` no longer has `log`, `error`, `info` methods
+- Replaced private constructor of `SpreadQuillManager`, `AccessQuillManager` with public
+
+### Internal
+
+- Added `FileQuill`
+- Added exports to barrel files
+- Exported `QuillTag`
+
 ## 2.0.0
 
 ### Breaking Changes

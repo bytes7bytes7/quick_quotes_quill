@@ -1,43 +1,43 @@
-import '../interface/quill_base.dart';
-import '../interface/quill_manager_base.dart';
-
-const _name = 'Spread Quill Manager';
+import '../interface/quill.dart';
+import '../interface/quill_manager.dart';
 
 /// Manager that spreads logs to each quill it stores.
-class SpreadQuillManager implements QuillManagerBase {
-  SpreadQuillManager._(this.name);
+class SpreadQuillManager implements QuillManager {
+  SpreadQuillManager(this.name);
 
-  static final inst = SpreadQuillManager._(_name);
-
-  /// {@macro quick_quotes_quill.QuillBase.name}
+  /// {@macro quick_quotes_quill.QuillManager.name}
   @override
   final String name;
 
-  final _quills = <QuillBase>[];
+  final _quills = <Quill>[];
+  var _initialized = false;
 
-  /// {@macro quick_quotes_quill.QuillManagerBase.initialize}
+  /// {@macro quick_quotes_quill.QuillManager.initialize}
   @override
-  Future<void> initialize(List<QuillBase> quills) async =>
-      _quills.addAll(quills);
+  Future<void> initialize(List<Quill> quills) async {
+    if (_initialized) {
+      throw Exception('$runtimeType has already been initialized');
+    }
 
-  /// {@macro quick_quotes_quill.QuillBase.log}
-  @override
+    _quills.addAll(quills);
+    _initialized = true;
+  }
+
+  /// {@macro quick_quotes_quill.Quill.log}
   void log(Object? msg) {
     for (final quill in _quills) {
       quill.log(msg);
     }
   }
 
-  /// {@macro quick_quotes_quill.QuillBase.error}
-  @override
+  /// {@macro quick_quotes_quill.Quill.error}
   void error(Object? msg) {
     for (final quill in _quills) {
       quill.error(msg);
     }
   }
 
-  /// {@macro quick_quotes_quill.QuillBase.info}
-  @override
+  /// {@macro quick_quotes_quill.Quill.info}
   void info(Object? msg) {
     for (final quill in _quills) {
       quill.info(msg);
