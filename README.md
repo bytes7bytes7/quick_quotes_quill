@@ -143,7 +143,7 @@ void accessQuillManager() {
 
     final quillX = quillManager.quill('Quill X');
     if (quillX == null) {
-      quillB.error('"Quill X" do not exist');
+      quillB.error('"Quill X" does not exist');
     }
   }
 }

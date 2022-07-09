@@ -1,6 +1,10 @@
+## 3.0.1
+
+- Changed version of `path` dependency
+
 ## 3.0.0
 
-## Breaking Changes
+### Breaking Changes
 
 - Renamed `QuillBase` to `Quill`, `QuillManagerBase` to `QuillManager`
 - `QuillManager` no longer extends `Quill`
