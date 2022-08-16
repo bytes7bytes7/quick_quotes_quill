@@ -7,6 +7,7 @@ void main() {
   fileQuill();
   spreadQuillManger();
   accessQuillManager();
+  changeConfig();
   customize();
 }
 
@@ -65,7 +66,7 @@ void accessQuillManager() {
   }
 }
 
-void customize() {
+void changeConfig() {
   quill
     ..info('Old style')
     ..config = quill.config.copyWith(
@@ -75,5 +76,16 @@ void customize() {
     )
     ..info('New style')
     ..turnOffColors()
-    ..error('No more colors!');
+    ..error('No more colors!')
+    ..turnOnColors();
+}
+
+void customize() {
+  quill
+    ..config = quill.config.copyWith(
+      nameFGColor: CQColor(222).fg, // set fg color of name to yellow-orange
+      nameBGColor: CQSTDColors.defaultBG,
+      msgStyle: CQStyle(7), // swap foreground and background colors
+    )
+    ..info('Custom color & style');
 }

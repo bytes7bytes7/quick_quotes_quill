@@ -86,7 +86,7 @@ double divide(int a, int b) {
 
 <img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/single_quill.png">
 
-Also you can use `FileQuill` to store your logs in file. This quill allows use to specify directory
+Also you can use `FileQuill` to store your logs in file. This quill allows you to specify directory
 and the max size of each log file. When a file reaches size limit, `FileQuill` archives it and
 create a new one.
 
@@ -151,14 +151,14 @@ void accessQuillManager() {
 
 <img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/access_manager.png">
 
-You can customize `ConsoleQuill`.
+You can customize `ConsoleQuill` by changing colors and styles.
 
 ```dart
 import 'package:quick_quotes_quill/console_quill.dart';
 
 final quill = ConsoleQuill('Single');
 
-void customize() {
+void changeConfig() {
   quill
     ..info('Old style')
     ..config = quill.config.copyWith(
@@ -168,7 +168,29 @@ void customize() {
     )
     ..info('New style')
     ..turnOffColors()
-    ..error('No more colors!');
+    ..error('No more colors!')
+    ..turnOnColors();
+}
+```
+
+<img src="https://raw.githubusercontent.com/bytes7bytes7/quick_quotes_quill/master/screenshots/change_config.png">
+
+There are two color collections: CQSTDColors CQHIColors and one style collection: CQSTDStyles. But
+you can create your own colors, styles.
+
+```dart
+import 'package:quick_quotes_quill/console_quill.dart';
+
+final quill = ConsoleQuill('Single');
+
+void customize() {
+  quill
+    ..config = quill.config.copyWith(
+      nameFGColor: CQColor(222).fg, // set fg color of name to yellow-orange
+      nameBGColor: CQSTDColors.defaultBG,
+      msgStyle: CQStyle(7), // swap foreground and background colors
+    )
+    ..info('Custom color & style');
 }
 ```
 
